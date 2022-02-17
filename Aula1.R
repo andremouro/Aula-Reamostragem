@@ -1,43 +1,43 @@
 #Aula 1
 
-#Começamos abrindo o diretório em que iremos trabalhar
-#A função setwd() abre um diretório (pasta). Então copiamos o caminho para a pasta
-#que queremos trabalhar, e colamos dentro da função. É preciso colocar o caminho entre aspas
-#pois não é um comando conhecido pelo programa.
+#ComeÃ§amos abrindo o diretÃ³rio em que iremos trabalhar
+#A funÃ§Ã£o setwd() abre um diretÃ³rio (pasta). EntÃ£o copiamos o caminho para a pasta
+#que queremos trabalhar, e colamos dentro da funÃ§Ã£o. Ã‰ preciso colocar o caminho entre aspas
+#pois nÃ£o Ã© um comando conhecido pelo programa.
 
-setwd('C:/Users/andre/Desktop/Documentos/Projetos/Dout/Proj-WoodDecomposition/PROJECT/ESCRITO/APRESENTAÇÃO/AulaDecomposi/AulaPrática')
+setwd('')
 
-#Depois de abrirmos a pasta que queremos trabalhar, é preciso abrir o arquivo.
+#Depois de abrirmos a pasta que queremos trabalhar, Ã© preciso abrir o arquivo.
 #No caso, queremos abrir o arquivo "Aranha_Amostra1.csv".
-#Para abrir um arquivo, usamos a função read.csv()
+#Para abrir um arquivo, usamos a funÃ§Ã£o read.csv()
 
 read.csv(
 "Aranha_Amostra1.csv", #Primeiro, colocamos o nome do arquivo
-header = T, #Agora indicamos que nessa planilha, as colunas possuem título
+header = T, #Agora indicamos que nessa planilha, as colunas possuem tÃ­tulo
 sep = ';' #Por fim, indicamos qual foi o separador de colunas utilizado. No caso, foi o ';'.
 )
 
-#A planilha foi aberta, no entanto não podemos trabalhar com ela. Para podermos trabalhar com a planilha
-#precisamos atribuí-la a um objeto. Vamos criar um objeto chamado "dados", e nele vamos colocar a planilha
-#Para criar um objeto, usamos o símbolo " <- ". 
+#A planilha foi aberta, no entanto nÃ£o podemos trabalhar com ela. Para podermos trabalhar com a planilha
+#precisamos atribuÃ­-la a um objeto. Vamos criar um objeto chamado "dados", e nele vamos colocar a planilha
+#Para criar um objeto, usamos o sÃ­mbolo " <- ". 
 
 dados <- read.csv("Aranha_Amostra1.csv", header = T, sep = ';')
 
-#Agora, toda vez que escrevermos dados, o programa irá trazer a nossa planilha
+#Agora, toda vez que escrevermos dados, o programa irÃ¡ trazer a nossa planilha
 
 dados
 
-#Vamos explorar um pouco estes dados.Para isso, podemos usar a função "str()"
+#Vamos explorar um pouco estes dados.Para isso, podemos usar a funÃ§Ã£o "str()"
 
 str(dados)
 
-#Vemos que "dados" é um data.frame (planilha). Possui 20 observações para 2 variáveis.
-#As variáveis são os nomes das colunas: ind e tamanho_espinhos. Vemos que a coluna ind
-#possui valores inteiros (int); enquanto que o tamanho_espinhos possui valores numéricos (num).
+#Vemos que "dados" Ã© um data.frame (planilha). Possui 20 observaÃ§Ãµes para 2 variÃ¡veis.
+#As variÃ¡veis sÃ£o os nomes das colunas: ind e tamanho_espinhos. Vemos que a coluna ind
+#possui valores inteiros (int); enquanto que o tamanho_espinhos possui valores numÃ©ricos (num).
 
 #Vamos sumarizar estes dados.
-#Para isso começamos calculando a média do tamanho dos espinhos das nossas amostras.
-#Vamos começar calculando na mão. 
+#Para isso comeÃ§amos calculando a mÃ©dia do tamanho dos espinhos das nossas amostras.
+#Vamos comeÃ§ar calculando na mÃ£o. 
 
 #Primeiro, precisamos selecionar a coluna tamanho_espinhos de dentro da nossa planilha.
 #Para fazer isso, podemos utilizar o sinal "$".
@@ -45,28 +45,28 @@ str(dados)
 dados$tamanho_espinhos
 
 #Com esse sinal, indicamos que queremos selecionar de dentro do data.frame dados, a coluna tamanho_espinhos.
-#Para calcular precisamos somar todos os valores e dividí-los pelo número de observações.
-#Para realizar a soma, podemos usar a função "sum()"
+#Para calcular precisamos somar todos os valores e dividÃ­-los pelo nÃºmero de observaÃ§Ãµes.
+#Para realizar a soma, podemos usar a funÃ§Ã£o "sum()"
 
 sum(dados$tamanho_espinhos)
 
-#A soma de todas as observações é de 4.77. Vamos dividir por 20.
+#A soma de todas as observaÃ§Ãµes Ã© de 4.77. Vamos dividir por 20.
 
 sum(dados$tamanho_espinhos)/20
 
-#A média do tamanho de espinhos da nossa amostra é de 0.24. Vamos criar um objeto com esse valor
+#A mÃ©dia do tamanho de espinhos da nossa amostra Ã© de 0.24. Vamos criar um objeto com esse valor
 
 med1 <- sum(dados$tamanho_espinhos)/20
 med1
 
-#Ao invés de calcular na mão. Podemos usar a função "mean()".
+#Ao invÃ©s de calcular na mÃ£o. Podemos usar a funÃ§Ã£o "mean()".
 
 med2 <- mean(dados$tamanho_espinhos)
 med2
 
-#Um outro parâmetro descritivo é a variância e o desvio padrão.
-#Vamos começar calculando a variância.
-#Vamos começar calculando a soma do tamanho dos espinhos - média
+#Um outro parÃ¢metro descritivo Ã© a variÃ¢ncia e o desvio padrÃ£o.
+#Vamos comeÃ§ar calculando a variÃ¢ncia.
+#Vamos comeÃ§ar calculando a soma do tamanho dos espinhos - mÃ©dia
 
 dados$tamanho_espinhos - med2
 
@@ -79,7 +79,7 @@ sum((dados$tamanho_espinhos - med2)^2)/19
 var1 <- sum((dados$tamanho_espinhos - med2)^2)/19
 var1
 
-#O desvio padrão é a raiz quadrada da variância
+#O desvio padrÃ£o Ã© a raiz quadrada da variÃ¢ncia
 
 desvpad1 <- var1^(1/2)
 desvpad1
@@ -87,14 +87,14 @@ desvpad1
 desvpad2 <- sqrt(var1)
 desvpad2
 
-#Ou podemos usar a função sd()
+#Ou podemos usar a funÃ§Ã£o sd()
 
 desvpad3 <- sd(dados$tamanho_espinhos)
 desvpad3
 
 ?sd
-#Agora vamos plotar esses dados em um boxplot, para termos uma visualização da média e da distribuição dos dados
-#Para plotar um boxplot, podemos usar a função "boxplot()".
+#Agora vamos plotar esses dados em um boxplot, para termos uma visualizaÃ§Ã£o da mÃ©dia e da distribuiÃ§Ã£o dos dados
+#Para plotar um boxplot, podemos usar a funÃ§Ã£o "boxplot()".
 
 boxplot(
 dados$tamanho_espinhos, #Primeiro colocamos o nome da coluna que queremos plotar
@@ -109,14 +109,14 @@ ylab = 'Tamanho dos espinhos (mm)' #E o nome do eixo y
 #Agora vamos abrir uma outra planilha
 #Vamos abrir a planilha "Aranhas_Amostra2.csv"
 
-#Abrimos o diretório, caso ainda não esteja aberto
-setwd('C:/Users/andre/Desktop/Documentos/Projetos/Dout/Proj-WoodDecomposition/PROJECT/ESCRITO/APRESENTAÇÃO/AulaDecomposi/AulaPrática')
+#Abrimos o diretÃ³rio, caso ainda nÃ£o esteja aberto
+setwd('C:/Users/andre/Desktop/Documentos/Projetos/Dout/Proj-WoodDecomposition/PROJECT/ESCRITO/APRESENTAÃ‡ÃƒO/AulaDecomposi/AulaPrÃ¡tica')
 
 #E vamos abrir a planilha "Aranhas_Amostra2.csv"
 
 read.csv(
 "Aranha_Amostra2.csv", #Primeiro, colocamos o nome do arquivo
-header = T, #Agora indicamos que nessa planilha, as colunas possuem título
+header = T, #Agora indicamos que nessa planilha, as colunas possuem tÃ­tulo
 sep = ';' #Por fim, indicamos qual foi o separador de colunas utilizado. No caso, foi o ';'.
 )
 
@@ -124,27 +124,27 @@ sep = ';' #Por fim, indicamos qual foi o separador de colunas utilizado. No caso
 
 dados2 <- read.csv(
 "Aranha_Amostra2.csv", #Primeiro, colocamos o nome do arquivo
-header = T, #Agora indicamos que nessa planilha, as colunas possuem título
+header = T, #Agora indicamos que nessa planilha, as colunas possuem tÃ­tulo
 sep = ';' #Por fim, indicamos qual foi o separador de colunas utilizado. No caso, foi o ';'.
 )
 
 dados2
 
-#Vamos ver os dados com a função str()
+#Vamos ver os dados com a funÃ§Ã£o str()
 
 str(dados2)
 
 #Vemos que esta planilha possui uma nova coluna, a coluna 'amostra'
-#Por essa coluna, conseguimos distinguir se a observação foi feita na amostra 1 ou na amostra 2
+#Por essa coluna, conseguimos distinguir se a observaÃ§Ã£o foi feita na amostra 1 ou na amostra 2
 
-#Agora vamos calcular a média, variância e desvio padrão para cada uma das amostras
+#Agora vamos calcular a mÃ©dia, variÃ¢ncia e desvio padrÃ£o para cada uma das amostras
 
 #Para fazer isso, precisamos selecionar apenas os dados de uma das amostras.
-#Podemos usar a função subset()
+#Podemos usar a funÃ§Ã£o subset()
 
 subset(
 dados2, #Primeiro, dizemos qual o data.frame que queremos dividir
-subset = dados2$amostra == 'amostra1' #Em seguida, damos o teste lógico para a divisão
+subset = dados2$amostra == 'amostra1' #Em seguida, damos o teste lÃ³gico para a divisÃ£o
 #No caso, queremos selecionar apenas as linhas em que na coluna 'amostra' esteja presente 'amostra1'
 )
 
@@ -152,14 +152,14 @@ subset = dados2$amostra == 'amostra1' #Em seguida, damos o teste lógico para a d
 
 dado.am1 <- subset(
 dados2, #Primeiro, dizemos qual o data.frame que queremos dividir
-subset = dados2$amostra == 'amostra1' #Em seguida, damos o teste lógico para a divisão
+subset = dados2$amostra == 'amostra1' #Em seguida, damos o teste lÃ³gico para a divisÃ£o
 #No caso, queremos selecionar apenas as linhas em que na coluna 'amostra' esteja presente 'amostra1'
 )
 
 dado.am1
 
 
-#Agora façam isso criando um objeto apenas com as observações da amostra2 e calculem a média, variância e desv pad para essa outra amostra.
+#Agora faÃ§am isso criando um objeto apenas com as observaÃ§Ãµes da amostra2 e calculem a mÃ©dia, variÃ¢ncia e desv pad para essa outra amostra.
 
 ##############################
 ##############################
@@ -182,33 +182,33 @@ desvpad1
 
 desvpad2 <- sd(dado.am2$tamanho_espinhos)
 
-#Agora vamos plotar os resultados, usando a função boxplot.
+#Agora vamos plotar os resultados, usando a funÃ§Ã£o boxplot.
 
 boxplot(
-tamanho_espinhos ~ amostra #colocamos aqui a função Tamanho dos espinhos em relação ao tipo de amostra
-, data = dados2 #E aqui, adicionamos o data.frame de onde serão retirados os dados
+tamanho_espinhos ~ amostra #colocamos aqui a funÃ§Ã£o Tamanho dos espinhos em relaÃ§Ã£o ao tipo de amostra
+, data = dados2 #E aqui, adicionamos o data.frame de onde serÃ£o retirados os dados
 )
 
 
 ########################################
 ########################################
-#######Análise de reamostragem##########
+#######AnÃ¡lise de reamostragem##########
 ########################################
 ########################################
 
-#Vamos usar o pacote 'Rsampling' para a análise
-#Vamos carregar o pacote usando a função library()
+#Vamos usar o pacote 'Rsampling' para a anÃ¡lise
+#Vamos carregar o pacote usando a funÃ§Ã£o library()
 library(Rsampling)
 
 #Agora vamos fazer uma reamostragem dos dados, apenas da amostra 1
-#Para fazer a reamostragem e tirar uma planilha com os dados, usamos a função
+#Para fazer a reamostragem e tirar uma planilha com os dados, usamos a funÃ§Ã£o
 #within_columns() do pacote
 
 within_columns(
-dado.am1, #Começamos identificando o data.frame com o qual iremos trabalhar
-cols = 3, #Agora dizemos qual a coluna que terá os dados embaralhados. No caso, é a coluna 3
-replace = T, #Indicamos que queremos que haja reposição dos dados
-FUN = base::sample #Usamos esse argumento que é padrão também.
+dado.am1, #ComeÃ§amos identificando o data.frame com o qual iremos trabalhar
+cols = 3, #Agora dizemos qual a coluna que terÃ¡ os dados embaralhados. No caso, Ã© a coluna 3
+replace = T, #Indicamos que queremos que haja reposiÃ§Ã£o dos dados
+FUN = base::sample #Usamos esse argumento que Ã© padrÃ£o tambÃ©m.
 )
 
 #Faltou atribuir a um objeto
@@ -223,7 +223,7 @@ FUN = base::sample
 dado.am1
 dado.r.am1
 
-#Agora vamos calcular a média, variância e desvpad desta nossa nova planilha.
+#Agora vamos calcular a mÃ©dia, variÃ¢ncia e desvpad desta nossa nova planilha.
 
 med.r <- mean(dado.r.am1$tamanho_espinhos)
 med.r
@@ -240,36 +240,36 @@ desvpad.r
 desvpad.r.2 <- sqrt(var.r.2)
 desvpad.r.2
 
-#Agora, vamos fazer muitas simulações, e ver o quanto o valor de média
-#varia entre as simulações
+#Agora, vamos fazer muitas simulaÃ§Ãµes, e ver o quanto o valor de mÃ©dia
+#varia entre as simulaÃ§Ãµes
 
-#Para isso, precisamos criar primeiro uma função
+#Para isso, precisamos criar primeiro uma funÃ§Ã£o
 
 stat <- function(dataframe){
 media <- mean(dataframe$tamanho_espinhos)
 }
 
-#E depois usamos a função Rsampling
+#E depois usamos a funÃ§Ã£o Rsampling
 
 data.r <-
 Rsampling(
 type = 'within_columns', #Dizemos o tipo de embaralhamento que queremos (dentro das colunas)
 data = dado.am1, #Indicamos oconjunto de dados (data.frame)
-statistics = stat, #Qual a estatística que será usada (a função que acabamos de criar)
-ntrials = 1000, #O número de embaralhamento
-replace = T, #Indicamos que deve haver a reposição de dados
-cols = 3 #E indicamos qual coluna será embaralhada
+statistics = stat, #Qual a estatÃ­stica que serÃ¡ usada (a funÃ§Ã£o que acabamos de criar)
+ntrials = 1000, #O nÃºmero de embaralhamento
+replace = T, #Indicamos que deve haver a reposiÃ§Ã£o de dados
+cols = 3 #E indicamos qual coluna serÃ¡ embaralhada
 )
 
 #Vamos ver os dados
 data.r
-#Cada valor representa a média calculada para o conjunto de dados sorteados.
+#Cada valor representa a mÃ©dia calculada para o conjunto de dados sorteados.
 
-#Vamos plotar agora a frequência dessas médias, usando a função hist()
+#Vamos plotar agora a frequÃªncia dessas mÃ©dias, usando a funÃ§Ã£o hist()
 hist(data.r)
 
-#Com a frequência, nós podemos calcular qual a probabilidade de tirarmos um valor de média ao acaso!
-#Para isso, calculamos quantas a proporção de aleatorizações que tiveram um valor maior que a média que desejamos saber
+#Com a frequÃªncia, nÃ³s podemos calcular qual a probabilidade de tirarmos um valor de mÃ©dia ao acaso!
+#Para isso, calculamos quantas a proporÃ§Ã£o de aleatorizaÃ§Ãµes que tiveram um valor maior que a mÃ©dia que desejamos saber
 
 sum(data.r >= stat(dado.am1))/1000
 
