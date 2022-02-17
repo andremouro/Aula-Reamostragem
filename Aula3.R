@@ -1,52 +1,52 @@
-#ComeÁamos abrindo o diretÛrio em que iremos trabalhar
+#Come√ßamos abrindo o diret√≥rio em que iremos trabalhar
 
-setwd('C:/Users/andre/Desktop/Documentos/Projetos/Dout/Proj-WoodDecomposition/PROJECT/ESCRITO/APRESENTA«√O/AulaDecomposi/AulaPr·tica')
+setwd('')
 
-#Vamos trabalhar com os dados de abund‚ncia de formigueiros.
+#Vamos trabalhar com os dados de abund√¢ncia de formigueiros.
 #Para isso precisamos abrir a planilha "TaxaDecomp"
-#Vamos abrir a planilha e atribuÌ-la ao objeto 'dados'
+#Vamos abrir a planilha e atribu√≠-la ao objeto 'dados'
 
 dados <- 
 read.csv(
 "TaxaDecomp.csv", #Primeiro, colocamos o nome do arquivo
-header = T, #Agora indicamos que nessa planilha, as colunas possuem tÌtulo
+header = T, #Agora indicamos que nessa planilha, as colunas possuem t√≠tulo
 sep = ';' #Por fim, indicamos qual foi o separador de colunas utilizado. No caso, foi o ';'.
 )
 
-#Vamos explorar um pouco estes dados.Para isso, podemos usar a funÁ„o "str()"
+#Vamos explorar um pouco estes dados.Para isso, podemos usar a fun√ß√£o "str()"
 
 str(dados)
 
-#Vemos que 'dados' È um data.frame. Possui 3 colunas (n_id, temp e taxa_decomp
-#O n_id refere-se ao n˙mero da parcela em que foram feitas as observaÁıes
-#A temp È a temperatura mÈdia em que as medidas de decomposiÁ„o foram feitas
-#taxa_decomp È a taxa de decomposiÁ„o da matÈria org‚nica.
+#Vemos que 'dados' √© um data.frame. Possui 3 colunas (n_id, temp e taxa_decomp
+#O n_id refere-se ao n√∫mero da parcela em que foram feitas as observa√ß√µes
+#A temp √© a temperatura m√©dia em que as medidas de decomposi√ß√£o foram feitas
+#taxa_decomp √© a taxa de decomposi√ß√£o da mat√©ria org√¢nica.
 
-#Neste caso, n„o h· a necessidade de tirarmos os par‚metros descritivos
-#O que vamos testar aqui È uma relaÁ„o entre as duas vari·veis (temp e taxa de decomp)
+#Neste caso, n√£o h√° a necessidade de tirarmos os par√¢metros descritivos
+#O que vamos testar aqui √© uma rela√ß√£o entre as duas vari√°veis (temp e taxa de decomp)
 #Para entender isso melhor, vamos plotar os dados
-#Para isso, vamos usar a funÁ„o plot()
+#Para isso, vamos usar a fun√ß√£o plot()
 
-#Para plotarmos, primeiro È necess·rio saber o que queremos testar
-#Queremos testar se h· uma relaÁ„o entre as duas vari·veis.
-#Com o aumento da temperatura, esperamos que aumente a taxa de decomposiÁ„o
-#Temperaturas muito baixas inibem a atividade dos decompositores, e por isso a decomposiÁ„o seria lenta
+#Para plotarmos, primeiro √© necess√°rio saber o que queremos testar
+#Queremos testar se h√° uma rela√ß√£o entre as duas vari√°veis.
+#Com o aumento da temperatura, esperamos que aumente a taxa de decomposi√ß√£o
+#Temperaturas muito baixas inibem a atividade dos decompositores, e por isso a decomposi√ß√£o seria lenta
 
-#Ent„o, neste caso, a vari·vel preditora È: TEMPERATURA
-#E a vari·vel resposta È: A TAXA DE DECOMPOSI«√O
+#Ent√£o, neste caso, a vari√°vel preditora √©: TEMPERATURA
+#E a vari√°vel resposta √©: A TAXA DE DECOMPOSI√á√ÉO
 
-#Ent„o vamos plotar
+#Ent√£o vamos plotar
 
 plot(
-taxa_decomp ~ temp, #Primeiro, colocamos a fÛrmula. Vari·vel Resposta ~ Vari·vel Preditora
+taxa_decomp ~ temp, #Primeiro, colocamos a f√≥rmula. Vari√°vel Resposta ~ Vari√°vel Preditora
 data = dados)
 
-#Aparentemente existe uma relaÁ„o entre as duas vari·veis. Uma relaÁ„o positiva
+#Aparentemente existe uma rela√ß√£o entre as duas vari√°veis. Uma rela√ß√£o positiva
 #Vamos ajustar um modelo linear, para que se estime o coeficiente angular e o intercepto
-#Para ajustar um modelo linear, usamos a funÁ„o lm()
+#Para ajustar um modelo linear, usamos a fun√ß√£o lm()
 
 lm(
-taxa_decomp ~ temp,#Primeiro, colocamos a fÛrmula. Vari·vel Resposta ~ Vari·vel Preditora
+taxa_decomp ~ temp,#Primeiro, colocamos a f√≥rmula. Vari√°vel Resposta ~ Vari√°vel Preditora
 data = dados)
 
 #Temos o valor do intercepto e o valor do coeficiente angular
@@ -60,28 +60,28 @@ mod$coefficients
 mod$coefficients[1] #Intercepto
 mod$coefficients[2] #Coeficiente angular
 
-#Agora podemos atÈ incluir o modelo estimado em nosso gr·fico
-#Para isso, podemos usar a funÁ„o abline()
+#Agora podemos at√© incluir o modelo estimado em nosso gr√°fico
+#Para isso, podemos usar a fun√ß√£o abline()
 abline(mod)
 
-#Para nos certificarmos que a relaÁ„o È significativa, precisamos nos certificar
-#que o coeficiente angular que encontramos È pouco prov·vel de ser obtido pelo acaso
-#Ou seja, que o coeficiente angular que obtemos È significativamente diferente de 0
+#Para nos certificarmos que a rela√ß√£o √© significativa, precisamos nos certificar
+#que o coeficiente angular que encontramos √© pouco prov√°vel de ser obtido pelo acaso
+#Ou seja, que o coeficiente angular que obtemos √© significativamente diferente de 0
 
-#Para isso, podemos utilizar o mÈtodo da reamostragem
+#Para isso, podemos utilizar o m√©todo da reamostragem
 
-#Vamos usar o pacote 'Rsampling' para a an·lise
-#Vamos carregar o pacote usando a funÁ„o library()
+#Vamos usar o pacote 'Rsampling' para a an√°lise
+#Vamos carregar o pacote usando a fun√ß√£o library()
 library(Rsampling)
 
-#Para fazer a reamostragem e tirar uma planilha com os dados, usamos a funÁ„o
+#Para fazer a reamostragem e tirar uma planilha com os dados, usamos a fun√ß√£o
 #within_columns() do pacote
 
 dados.r <- within_columns(
-dados, #ComeÁamos identificando o data.frame com o qual iremos trabalhar
-cols = 3, #Agora dizemos qual a coluna que ter· os dados embaralhados. No caso, È a coluna 2
-replace = F, #Indicamos que n„o queremos que haja reposiÁ„o dos dados
-FUN = base::sample #Usamos esse argumento que È padr„o tambÈm.
+dados, #Come√ßamos identificando o data.frame com o qual iremos trabalhar
+cols = 3, #Agora dizemos qual a coluna que ter√° os dados embaralhados. No caso, √© a coluna 2
+replace = F, #Indicamos que n√£o queremos que haja reposi√ß√£o dos dados
+FUN = base::sample #Usamos esse argumento que √© padr√£o tamb√©m.
 )
 
 dados.r
@@ -91,7 +91,7 @@ dados.r
 plot(taxa_decomp ~ temp, data = dados.r)
 
 #Os dados ficaram muito diferentes.
-#Vamos ajustar um modelo linear e ver se houve diferenÁa nos par‚metros estimados
+#Vamos ajustar um modelo linear e ver se houve diferen√ßa nos par√¢metros estimados
 
 mod.r <- lm(taxa_decomp ~ temp, data = dados.r)
 mod.r
@@ -106,38 +106,38 @@ abline(mod.r)
 
 
 
-#Agora, vamos fazer muitas simulaÁıes, e ver o quanto o valor de mÈdia
-#varia entre as simulaÁıes
+#Agora, vamos fazer muitas simula√ß√µes, e ver o quanto o valor de m√©dia
+#varia entre as simula√ß√µes
 
-#Para isso, precisamos criar primeiro uma funÁ„o
-#Nessa funÁ„o, queremos automatizar a estimativa do coeficiente angular
+#Para isso, precisamos criar primeiro uma fun√ß√£o
+#Nessa fun√ß√£o, queremos automatizar a estimativa do coeficiente angular
 
 stat <- function(dataframe){
 mod <- lm(taxa_decomp ~ temp, data = dataframe)
 coef <- mod$coefficients[2]
 }
 
-#E depois usamos a funÁ„o Rsampling
+#E depois usamos a fun√ß√£o Rsampling
 
 data.r <-
 Rsampling(
 type = 'within_columns', #Dizemos o tipo de embaralhamento que queremos (dentro das colunas)
 data = dados, #Indicamos oconjunto de dados (data.frame)
-statistics = stat, #Qual a estatÌstica que ser· usada (a funÁ„o que acabamos de criar)
-ntrials = 1000, #O n˙mero de embaralhamento
-replace = F, #Indicamos que deve haver a reposiÁ„o de dados
-cols = 3 #E indicamos qual coluna ser· embaralhada
+statistics = stat, #Qual a estat√≠stica que ser√° usada (a fun√ß√£o que acabamos de criar)
+ntrials = 1000, #O n√∫mero de embaralhamento
+replace = F, #Indicamos que deve haver a reposi√ß√£o de dados
+cols = 3 #E indicamos qual coluna ser√° embaralhada
 )
 
 #Vamos ver os dados
 data.r
-#Cada valor representa a mÈdia calculada para o conjunto de dados sorteados.
+#Cada valor representa a m√©dia calculada para o conjunto de dados sorteados.
 
-#Vamos plotar agora a frequÍncia dessas mÈdias, usando a funÁ„o hist()
+#Vamos plotar agora a frequ√™ncia dessas m√©dias, usando a fun√ß√£o hist()
 hist(data.r)
 
-#Com a frequÍncia, nÛs podemos calcular qual a probabilidade de tirarmos um valor de mÈdia ao acaso!
-#Para isso, calculamos quantas a proporÁ„o de aleatorizaÁıes que tiveram um valor maior que a mÈdia que desejamos saber
+#Com a frequ√™ncia, n√≥s podemos calcular qual a probabilidade de tirarmos um valor de m√©dia ao acaso!
+#Para isso, calculamos quantas a propor√ß√£o de aleatoriza√ß√µes que tiveram um valor maior que a m√©dia que desejamos saber
 
 sum(data.r >= stat(dados))/1000
 
