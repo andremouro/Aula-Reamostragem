@@ -1,44 +1,44 @@
-#ComeÁamos abrindo o diretÛrio em que iremos trabalhar
+#Come√ßamos abrindo o diret√≥rio em que iremos trabalhar
 
-setwd('C:/Users/andre/Desktop/Documentos/Projetos/Dout/Proj-WoodDecomposition/PROJECT/ESCRITO/APRESENTA«√O/AulaDecomposi/AulaPr·tica')
+setwd('')
 
-#Vamos trabalhar com os dados de abund‚ncia de formigueiros.
+#Vamos trabalhar com os dados de abund√¢ncia de formigueiros.
 #Para isso precisamos abrir a planilha "DadoFormig"
-#Vamos abrir a planilha e atribuÌ-la ao objeto 'dados'
+#Vamos abrir a planilha e atribu√≠-la ao objeto 'dados'
 
 dados <- 
 read.csv(
 "DadoFormig.csv", #Primeiro, colocamos o nome do arquivo
-header = T, #Agora indicamos que nessa planilha, as colunas possuem tÌtulo
+header = T, #Agora indicamos que nessa planilha, as colunas possuem t√≠tulo
 sep = ';' #Por fim, indicamos qual foi o separador de colunas utilizado. No caso, foi o ';'.
 )
 
-#Vamos explorar um pouco estes dados.Para isso, podemos usar a funÁ„o "str()"
+#Vamos explorar um pouco estes dados.Para isso, podemos usar a fun√ß√£o "str()"
 
 str(dados)
 
-#Vemos que 'dados' È um data.frame. Possui 3 colunas (n_id, habitat e n_formig)
-#O n_id refere-se ao n˙mero da parcela em que foram feitas as observaÁıes
-#O habitat diz respeito ‡ estrutura da vegetaÁ„o em que as observaÁıes foram feitas
-#n_formig È o n˙mero de formigueiros encontrados dentro da parcela.
+#Vemos que 'dados' √© um data.frame. Possui 3 colunas (n_id, habitat e n_formig)
+#O n_id refere-se ao n√∫mero da parcela em que foram feitas as observa√ß√µes
+#O habitat diz respeito √† estrutura da vegeta√ß√£o em que as observa√ß√µes foram feitas
+#n_formig √© o n√∫mero de formigueiros encontrados dentro da parcela.
 
-#Vamos extrair os par‚metros descritivos (mÈdia, vari‚ncia e desvio padr„o)
+#Vamos extrair os par√¢metros descritivos (m√©dia, vari√¢ncia e desvio padr√£o)
 #Vamos fazer isso para o campo e para a floresta
 
-#ComeÁamos criando um novo data.frame apenas com as observaÁıes feitas no 'campo'.
+#Come√ßamos criando um novo data.frame apenas com as observa√ß√µes feitas no 'campo'.
 
-#Podemos usar a funÁ„o subset()
+#Podemos usar a fun√ß√£o subset()
 
 dados.c <-
 subset(
 dados, #Primeiro, dizemos qual o data.frame que queremos dividir
-subset = dados$habitat == 'Campo' #Em seguida, damos o teste lÛgico para a divis„o
+subset = dados$habitat == 'Campo' #Em seguida, damos o teste l√≥gico para a divis√£o
 #No caso, queremos selecionar apenas as linhas em que na coluna 'habitat' esteja presente 'Campo'
 )
 
 dados.c
 
-#Queremos calcular a mÈdia do n˙mero de formigueiros por parcelas no Campo
+#Queremos calcular a m√©dia do n√∫mero de formigueiros por parcelas no Campo
 med.c <- mean(dados.c$n_formig)
 med.c
 
@@ -53,13 +53,13 @@ desv.c
 dados.f <-
 subset(
 dados, #Primeiro, dizemos qual o data.frame que queremos dividir
-subset = dados$habitat == 'Floresta' #Em seguida, damos o teste lÛgico para a divis„o
+subset = dados$habitat == 'Floresta' #Em seguida, damos o teste l√≥gico para a divis√£o
 #No caso, queremos selecionar apenas as linhas em que na coluna 'habitat' esteja presente 'Floresta'
 )
 
 dados.f
 
-#Queremos calcular a mÈdia do n˙mero de formigueiros por parcelas no Campo
+#Queremos calcular a m√©dia do n√∫mero de formigueiros por parcelas no Campo
 med.f <- mean(dados.f$n_formig)
 med.f
 
@@ -69,35 +69,35 @@ var.f
 desv.f <- sd(dados.f$n_formig)
 desv.f
 
-#Agora que tiramos os par‚metros descritivos das amostras, vamos plotar os resultados
+#Agora que tiramos os par√¢metros descritivos das amostras, vamos plotar os resultados
 #Para isso, precisamos saber o que queremos testar
 
-#O problema proposto indica que o pesquisador deseja saber se a presenÁa de formigueiros est· relacionada com a estrutura da comunidade vegetal.
-#Ent„o ele quer saber se h· diferenÁa na densidade de formigueiros entre Campo e Floresta
-#Neste caso, a vari·vel preditora È: O HABITAT
-#E a vari·vel resposta È: O N∫ de FORMIGUEIROS
+#O problema proposto indica que o pesquisador deseja saber se a presen√ßa de formigueiros est√° relacionada com a estrutura da comunidade vegetal.
+#Ent√£o ele quer saber se h√° diferen√ßa na densidade de formigueiros entre Campo e Floresta
+#Neste caso, a vari√°vel preditora √©: O HABITAT
+#E a vari√°vel resposta √©: O N¬∫ de FORMIGUEIROS
 
-#Plotamos um boxplot (j· que a vari·vel preditora È categÛrica)
+#Plotamos um boxplot (j√° que a vari√°vel preditora √© categ√≥rica)
 
 boxplot(
-n_formig ~ habitat, #Primeiro colocamos a fÛrmula Vari·vel Resposta ~ Vari·vel Preditora
+n_formig ~ habitat, #Primeiro colocamos a f√≥rmula Vari√°vel Resposta ~ Vari√°vel Preditora
 data = dados)
 
-#Vemos que h· diferenÁa, mas precisamos testar se ela È significativa, ou se poderia ser fruto do acaso.
-#Para isso, usaremos o mÈtodo de Re-amostragem
+#Vemos que h√° diferen√ßa, mas precisamos testar se ela √© significativa, ou se poderia ser fruto do acaso.
+#Para isso, usaremos o m√©todo de Re-amostragem
 
-#Primeiro, precisamos definir a estatÌstica de interesse (o teste)
-#Queremos testar a diferenÁa entre as mÈdias de formigueiros no campo e na floresta
-#Vamos calcular essa diferenÁa nos dados que coletamos
-#Para calcular cada mÈdia, podemos usa a funÁ„o tapply()
+#Primeiro, precisamos definir a estat√≠stica de interesse (o teste)
+#Queremos testar a diferen√ßa entre as m√©dias de formigueiros no campo e na floresta
+#Vamos calcular essa diferen√ßa nos dados que coletamos
+#Para calcular cada m√©dia, podemos usa a fun√ß√£o tapply()
 
 tapply(
-dados$n_formig,#Primeiro, adicionamos a coluna com os valores de interesse. No caso, È o n∫ de formigueiros
- INDEX= dados$habitat, #depois, usamos o Ìndice que ser· usado para separar as obseraÁıes. Nossas observaÁıes est„o separadas pelo habitat, ent„o selecionamos essa coluna.
- FUN = mean #Por fim, adicionamos a funÁ„o que queremos realizar. No caso, a mÈdia.
+dados$n_formig,#Primeiro, adicionamos a coluna com os valores de interesse. No caso, √© o n¬∫ de formigueiros
+ INDEX= dados$habitat, #depois, usamos o √≠ndice que ser√° usado para separar as obsera√ß√µes. Nossas observa√ß√µes est√£o separadas pelo habitat, ent√£o selecionamos essa coluna.
+ FUN = mean #Por fim, adicionamos a fun√ß√£o que queremos realizar. No caso, a m√©dia.
 )
 
-#Obtemos dois valores. Um valor de mÈdia para o campo, e o outro para a floresta.
+#Obtemos dois valores. Um valor de m√©dia para o campo, e o outro para a floresta.
 #Vamos colocar esses resultados em um objeto chamado 'meds'
 
 meds <- tapply(
@@ -107,30 +107,30 @@ dados$n_formig,
 )
 meds
 
-#Para selecionar um dado especÌfico neste objeto, podemos usar o operador []
+#Para selecionar um dado espec√≠fico neste objeto, podemos usar o operador []
 meds[1]#Seleciona o primeiro dado
 meds[2]#Seleciona o segundo dado
 
-#Agora vamos calcular a diferenÁa entre as mÈdias
+#Agora vamos calcular a diferen√ßa entre as m√©dias
 
 dif.obs <- meds[1] - meds[2]
 dif.obs
 
-#Precisamos nos certificar que essa diferenÁa n„o foi obtida pelo acaso.
-#Vamos fazer a aleatorizaÁ„o dos dados, e calcular a diferenÁa entre as mÈdias dos dados aleatorizados
+#Precisamos nos certificar que essa diferen√ßa n√£o foi obtida pelo acaso.
+#Vamos fazer a aleatoriza√ß√£o dos dados, e calcular a diferen√ßa entre as m√©dias dos dados aleatorizados
 
-#Vamos usar o pacote 'Rsampling' para a an·lise
-#Vamos carregar o pacote usando a funÁ„o library()
+#Vamos usar o pacote 'Rsampling' para a an√°lise
+#Vamos carregar o pacote usando a fun√ß√£o library()
 library(Rsampling)
 
-#Para fazer a reamostragem e tirar uma planilha com os dados, usamos a funÁ„o
+#Para fazer a reamostragem e tirar uma planilha com os dados, usamos a fun√ß√£o
 #within_columns() do pacote
 
 dados.r <- within_columns(
-dados, #ComeÁamos identificando o data.frame com o qual iremos trabalhar
-cols = 2, #Agora dizemos qual a coluna que ter· os dados embaralhados. No caso, È a coluna 2
-replace = F, #Indicamos que n„o queremos que haja reposiÁ„o dos dados
-FUN = base::sample #Usamos esse argumento que È padr„o tambÈm.
+dados, #Come√ßamos identificando o data.frame com o qual iremos trabalhar
+cols = 2, #Agora dizemos qual a coluna que ter√° os dados embaralhados. No caso, √© a coluna 2
+replace = F, #Indicamos que n√£o queremos que haja reposi√ß√£o dos dados
+FUN = base::sample #Usamos esse argumento que √© padr√£o tamb√©m.
 )
 
 meds.r <- tapply(
@@ -143,38 +143,38 @@ meds.r
 dif.r <- meds.r[1] - meds.r[2]
 dif.r
 
-#Agora, vamos fazer muitas simulaÁıes, e ver o quanto o valor de mÈdia
-#varia entre as simulaÁıes
+#Agora, vamos fazer muitas simula√ß√µes, e ver o quanto o valor de m√©dia
+#varia entre as simula√ß√µes
 
-#Para isso, precisamos criar primeiro uma funÁ„o
-#Nessa funÁ„o, automatizamos o calculo da diferenÁa das mÈdias.
+#Para isso, precisamos criar primeiro uma fun√ß√£o
+#Nessa fun√ß√£o, automatizamos o calculo da diferen√ßa das m√©dias.
 
 stat <- function(dataframe){
 meds <- tapply(dataframe$n_formig, INDEX = dataframe$habitat, FUN = mean)
 dif <- meds[1] - meds[2]
 }
 
-#E depois usamos a funÁ„o Rsampling
+#E depois usamos a fun√ß√£o Rsampling
 
 data.r <-
 Rsampling(
 type = 'within_columns', #Dizemos o tipo de embaralhamento que queremos (dentro das colunas)
 data = dados, #Indicamos oconjunto de dados (data.frame)
-statistics = stat, #Qual a estatÌstica que ser· usada (a funÁ„o que acabamos de criar)
-ntrials = 1000, #O n˙mero de embaralhamento
-replace = F, #Indicamos que deve haver a reposiÁ„o de dados
-cols = 2 #E indicamos qual coluna ser· embaralhada
+statistics = stat, #Qual a estat√≠stica que ser√° usada (a fun√ß√£o que acabamos de criar)
+ntrials = 1000, #O n√∫mero de embaralhamento
+replace = F, #Indicamos que deve haver a reposi√ß√£o de dados
+cols = 2 #E indicamos qual coluna ser√° embaralhada
 )
 
 #Vamos ver os dados
 data.r
-#Cada valor representa a mÈdia calculada para o conjunto de dados sorteados.
+#Cada valor representa a m√©dia calculada para o conjunto de dados sorteados.
 
-#Vamos plotar agora a frequÍncia dessas mÈdias, usando a funÁ„o hist()
+#Vamos plotar agora a frequ√™ncia dessas m√©dias, usando a fun√ß√£o hist()
 hist(data.r)
 
-#Com a frequÍncia, nÛs podemos calcular qual a probabilidade de tirarmos um valor de mÈdia ao acaso!
-#Para isso, calculamos quantas a proporÁ„o de aleatorizaÁıes que tiveram um valor maior que a mÈdia que desejamos saber
+#Com a frequ√™ncia, n√≥s podemos calcular qual a probabilidade de tirarmos um valor de m√©dia ao acaso!
+#Para isso, calculamos quantas a propor√ß√£o de aleatoriza√ß√µes que tiveram um valor maior que a m√©dia que desejamos saber
 
 sum(data.r >= stat(dados))/1000
 
